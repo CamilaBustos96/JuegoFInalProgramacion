@@ -12,6 +12,7 @@ class gameover extends Phaser.Scene {
 
     }
     create(){
+        this.musicaloca.stop();
         this.add.image(0, 0, 'perdiste').setOrigin(0).setScale(.5);
         var botonreinicio = this.add.image(700, 400, 'BotonR').setScale(.4);
         botonreinicio.setInteractive()
