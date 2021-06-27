@@ -13,7 +13,7 @@ var gameConfig = {
         height: 768
       
     },
-    scene: [pantallamenu, creditos, tutorial, nivel1, nivel2, gameover],
+    scene: [pantallamenu, creditos, tutorial, nivel1, nivel2, gameover, win, winnivel2, gameovernivel2, tutorialnivel2],
 
     // physics settings
     physics: 
@@ -23,7 +23,7 @@ var gameConfig = {
             gravity: {
                 y: 450
             },
-            debug: true
+            debug: false
         }
     }
 }
@@ -35,3 +35,31 @@ var platform;
 var desinfectante;
 var puntos = 0;
 var textopuntos;
+var contagio;
+var gameOver;
+var TiempoInicial;
+var TimeEvent;
+var timeText;
+var vidaJugador = 3;
+var textoVidaJugador;
+var corazones;
+//var live;
+var barbijo;
+var mascarita;
+var TiempoMascara;
+var ganarCasita;
+var ganaste;
+var vacunacion;
+var plataformados;
+var yuta;
+var virus;
+var tween;
+var puntosnivel = 0;
+var textopuntosnivel;
+//SONIDOS
+var sonidosalto;
+var recogergel;
+var sonidomuerte;
+var dañado;
+var superganador;
+var musicaloca;
