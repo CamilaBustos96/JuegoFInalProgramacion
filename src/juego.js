@@ -63,3 +63,7 @@ var sonidomuerte;
 var dañado;
 var superganador;
 var musicaloca;
+
+//CORONA
+var virus;
+var twee;

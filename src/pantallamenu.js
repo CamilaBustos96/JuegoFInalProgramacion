@@ -15,21 +15,31 @@ class pantallamenu extends Phaser.Scene
 
     }
     create(){
-        var sonidoboton = this.sound.add('boton');
+        //var sonidoboton = this.sound.add('boton');
         this.musicaloca = this.sound.add('musical',{
-            loop: true
+            loop: true,
+            mute: false,
+            volume: 0.2,
         });
-    
+        this.musicaloca.play();
+
         this.add.image(0, 0, 'FondoM').setOrigin(0).setScale(0.5);
         var botonjugar = this.add.image(700, 400, 'BotonJ').setScale(.4)
         botonjugar.setInteractive()
+        botonjugar.on('pointerdown', () => {
+            this.musicaloca.mute = true;
+        } );
         botonjugar.on('pointerdown', () => this.scene.start('TutorialJuego') );
-        this.musicaloca.play();
+        
         
         var botoninfo = this.add.image(700, 550, 'BotonI').setScale(.4)
         //botoninfo.setScale(.4)
         botoninfo.setInteractive()
+        botoninfo.on('pointerdown', () => {
+            this.musicaloca.mute = true;
+        });
         botoninfo.on('pointerdown', () => this.scene.start('Creditos') );
+
 
         //var botonnivel2 = this.add.image(700, 700, 'BotonN2').setScale(.4)
         //botonnivel2.setInteractive()

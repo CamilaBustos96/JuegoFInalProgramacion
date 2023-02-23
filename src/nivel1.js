@@ -4,6 +4,7 @@ class nivel1 extends Phaser.Scene {
     }
 
     preload(){
+        this.load.audio('musical', './Assets/Musica/musiquuita.wav');
         this.load.audio('saltito', './Assets/Musica/salto.mp3');
         this.load.audio('sonidosgel', './Assets/Musica/recoger_gel.mp3');
         this.load.audio('die', './Assets/Musica/muerte.mp3');
@@ -31,6 +32,7 @@ class nivel1 extends Phaser.Scene {
     }
 
     create(){
+        
         //CAMARA
         this.cameras.main.setBounds(0, 0, 10500, 768)
         this.physics.world.bounds.width = 10500
@@ -48,6 +50,13 @@ class nivel1 extends Phaser.Scene {
         this.superganador = this.sound.add('winner', {
             loop: false
         })
+        this.musicaloca = this.sound.add('musical',{
+            loop: true,
+            mute: false,
+            volume: 0.2,
+        });
+        this.musicaloca.play();
+    
         
         //game.world.setBounds(0, 0, 10927, 1537);
         this.add.image(0, 0, 'FondoNivelUno').setOrigin(0).setScale(.5);
@@ -276,7 +285,8 @@ class nivel1 extends Phaser.Scene {
         TimeEvent.paused = true;
         puntos = 0;
         vidaJugador = 3;
-        this.sonidomuerte.play();
+        this.musicaloca.stop();
+        this.sonidomuerte.play(); 
         this.scene.start('GameOver')
         
     }
@@ -330,6 +340,7 @@ class nivel1 extends Phaser.Scene {
     ganarpartida(player, ganarCasita)
     {   
         if (puntos >= 30){
+            this.musicaloca.stop();
             this.superganador.play();
             this.ganaste()
         }

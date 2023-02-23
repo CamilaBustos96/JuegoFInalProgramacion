@@ -3,6 +3,7 @@ class nivel2 extends Phaser.Scene {
         super('Nivel2')
     }
     preload(){
+        this.load.audio('musical', './Assets/Musica/musiquuita.wav');
         this.load.audio('saltito', './Assets/Musica/salto.mp3');
         this.load.audio('sonidosgel', './Assets/Musica/recoger_gel.mp3');
         this.load.audio('die', './Assets/Musica/muerte.mp3');
@@ -46,6 +47,12 @@ class nivel2 extends Phaser.Scene {
         this.superganador = this.sound.add('winner', {
             loop: false
         })
+        this.musicaloca = this.sound.add('musical',{
+            loop: true,
+            mute: false,
+            volume: 0.2,
+        });
+        this.musicaloca.play();
         //Fondo
         this.add.image(0, 0, 'Fondo2').setOrigin(0).setScale(.5);
         this.add.image(5460, 0, 'Fondo2').setOrigin(0).setScale(.5);
@@ -143,24 +150,27 @@ class nivel2 extends Phaser.Scene {
         yuta.create(7700, 200, 'policias').setScale(.7);
         yuta.create(8870, 200, 'policias').setScale(.7);
         this.physics.add.collider(yuta, plataformados);
-        //CORONA
-        virus = this.physics.add.group();
-        virus.create(2000, 100, 'corona').setScale(.7);
-        virus.create(2500, 300, 'corona').setScale(.7);
-        virus.create(3500, 300, 'corona').setScale(.7);
-        virus.create(3600, 100, 'corona').setScale(.7);
-        virus.create(4400, 300, 'corona').setScale(.7);
-        virus.create(5300, 200, 'corona').setScale(.7);
-        virus.create(5800, 500, 'corona').setScale(.7);
-        virus.create(6300, 300, 'corona').setScale(.7);
-        virus.create(6800, 100, 'corona').setScale(.7);
-        virus.create(8100, 100, 'corona').setScale(.7);
-        virus.create(8300, 300, 'corona').setScale(.7);
-        virus.create(9700, 500, 'corona').setScale(.7);
-        //virus.physicsBodyType = Phaser.Physics.ARCADE;
-        //var animacion = game.add.tween(virus).to({x: 100}, 5000, Phaser.Easing.Linear.None, true, 0, 5000, true);
-        //tween = this.game.add.tween(virus).to( { x: 100 }, 5000, Phaser.Easing.Linear.None, true, 0, 5000, true);
+        
+        //CORONAVIRUS
+        var virus = this.physics.add.group({
+            key: 'corona',
+            repeat: 40, //cuantos virus crea
+            setScale: {x: 0.7, y: 0.7},
+            setXY: {x: 200, y: 200, stepX: 500} // donde y cada cuanto
+
+        });
+
+        virus.children.iterate(function(corona) {
+            corona.setBounce(1)
+            corona.setVelocityX(200)
+            corona.setCollideWorldBounds()
+        })
+
         this.physics.add.collider(virus, plataformados);
+        this.physics.add.collider(player, virus, this.rip, null, this);
+
+
+        
         //TAPABOCAS
         for (var i = 0; i < 1; i++){
             var x= Phaser.Math.Between(500,9000);
@@ -212,7 +222,13 @@ class nivel2 extends Phaser.Scene {
         //TEXTOPUNTAJE
         textopuntosnivel = this.add.text(150, 50, '30/0', { fontSize: '30px', fill: '#FFF' });
         textopuntosnivel.setScrollFactor(0);
-
+        //COLLIDER
+        //this.physics.add.collider(player, mascarita, this.power2, null, this);
+        //this.physics.add.collider(player, barbijo, this.power1, null, this);
+        //this.physics.add.collider(player, vacunacion, this.vacunado, null, this);
+        //this.physics.add.collider(player, yuta, this.atrapado, null, this);
+        //this.physics.add.collider(player, virus, this.rip, null, this);
+        //this.physics.add.collider(player, ganarCasita, this.ganarpartida, null, this);
     }
     update()
     {
@@ -254,7 +270,7 @@ class nivel2 extends Phaser.Scene {
     }
     rip(player, virus){
         virus.destroy();
-        if (vidaJugador < 3){
+        if (vidaJugador <= 10){
             this.gameOver()
         }
     }
@@ -266,6 +282,7 @@ class nivel2 extends Phaser.Scene {
         TimeEvent.paused = true;
         puntosnivel = 0;
         vidaJugador = 3;
+        this.musicaloca.stop();
         this.sonidomuerte.play();
         this.scene.start('gameovernivel')
         
@@ -315,6 +332,7 @@ class nivel2 extends Phaser.Scene {
     ganarpartida(player, ganarCasita)
     {   
         if (puntosnivel >= 30){
+            this.musicaloca.stop();
             this.superganador.play();
             this.ganaste()
         }

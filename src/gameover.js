@@ -19,7 +19,7 @@ class gameover extends Phaser.Scene {
         botonreinicio.on('pointerdown', () => this.scene.start('N1'));
         var botonmenucito = this.add.image(700, 550, 'BotonMe').setScale(.4);
         botonmenucito.setInteractive()
-        botonmenucito.on('pointerdown', () => this.scene.start('Menu'));    
+        botonmenucito.on('pointerdown', () => this.scene.start('Menu'));   
     }
 
 }

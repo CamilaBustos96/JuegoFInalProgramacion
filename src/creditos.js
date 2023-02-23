@@ -17,8 +17,7 @@ class creditos extends Phaser.Scene
         this.add.image(0, 0, 'FondoCre').setOrigin(0).setScale(.5);
         var botonmenu = this.add.image(700, 650, 'BotonM').setScale(.4)
         botonmenu.setInteractive()
-        botonmenu.on('pointerdown', () => this.scene.start('Menu') );
-    
+        botonmenu.on('pointerdown', () => this.scene.start('Menu') ); 
         
     }
 
