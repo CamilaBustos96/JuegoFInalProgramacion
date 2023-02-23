@@ -1,4 +1,4 @@
-class tutorialnivel2 extends Phaser.Scene{
+class tutorialnivel2 extends Phaser.Scene {
     constructor(){
         super('tutonivel')
     }

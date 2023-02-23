@@ -1,4 +1,4 @@
-//import { CST } from "../CST";
+
 class pantallamenu extends Phaser.Scene 
 {
     constructor() {
@@ -15,7 +15,7 @@ class pantallamenu extends Phaser.Scene
 
     }
     create(){
-        //var sonidoboton = this.sound.add('boton');
+
         this.musicaloca = this.sound.add('musical',{
             loop: true,
             mute: false,
@@ -39,13 +39,7 @@ class pantallamenu extends Phaser.Scene
             this.musicaloca.mute = true;
         });
         botoninfo.on('pointerdown', () => this.scene.start('Creditos') );
-
-
-        //var botonnivel2 = this.add.image(700, 700, 'BotonN2').setScale(.4)
-        //botonnivel2.setInteractive()
-        //botonnivel2.on('pointerdown', () => this.scene.start('Nivel2'));
-
-        
+    
     }
  
 }

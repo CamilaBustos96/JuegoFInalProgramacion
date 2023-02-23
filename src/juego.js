@@ -1,6 +1,3 @@
-//import {MENU} from "./src/scenes/menu";
-//import {TUTORIAL} from "./src/scenes/tutorial";
-//let game;
 
 var gameConfig = {
     type: Phaser.AUTO,
@@ -63,7 +60,3 @@ var sonidomuerte;
 var dañado;
 var superganador;
 var musicaloca;
-
-//CORONA
-var virus;
-var twee;
